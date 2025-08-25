@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asexual Reproduction & Selective Breeding</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .nav-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            background-color: #2e7d32;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .page {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .caption {
+            font-style: italic;
+            padding: 10px;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .interactive-box {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .interactive-box h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-container {
+            margin-top: 20px;
+        }
+        
+        .quiz-question {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-option {
+            padding: 10px;
+            background-color: #f1f8e9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background-color: #c5e1a5;
+        }
+        
+        .selected {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .feedback {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+        
+        .incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        
+        .btn-submit {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #2e7d32;
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .references {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Asexual Reproduction & Selective Breeding</h1>
+            <p class="subtitle">How Farmers Use Plant Reproduction for Cultivation</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="showPage(0)"><i class="fas fa-seedling"></i> Introduction</button>
+            <button class="nav-btn" onclick="showPage(1)"><i class="fas fa-dna"></i> Asexual Reproduction</button>
+            <button class="nav-btn" onclick="showPage(2)"><i class="fas fa-leaf"></i> Rhizomes & Examples</button>
+            <button class="nav-btn" onclick="showPage(3)"><i class="fas fa-apple-alt"></i> Selective Breeding</button>
+            <button class="nav-btn" onclick="showPage(4)"><i class="fas fa-tractor"></i> Cultivated Plants</button>
+            <button class="nav-btn" onclick="showPage(5)"><i class="fas fa-brain"></i> Interactive Quiz</button>
+        </div>
+        
+        <!-- Page 1: Introduction -->
+        <div class="page active">
+            <h2>Introduction: Reproduction in Plants</h2>
+            <p>When we think about reproduction, we often imagine two parents contributing genetic material to create offspring. However, in the plant kingdom, reproduction doesn't always require two parents.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Various plants showing diversity">
+                <div class="caption">Diversity of cultivated plants</div>
+            </div>
+            
+            <p>Many plants can reproduce asexually, creating genetically identical copies of themselves. This fascinating biological process allows farmers to propagate desirable plants efficiently.</p>
+            
+            <div class="interactive-box">
+                <h3>Did You Know?</h3>
+                <p>Some plant species can reproduce both sexually and asexually, choosing the method that best suits their environmental conditions!</p>
+            </div>
+            
+            <p>Throughout this website, you'll learn about asexual reproduction in plants, how farmers use this knowledge for selective breeding, and the importance of these techniques in agriculture.</p>
+        </div>
+        
+        <!-- Page 2: Asexual Reproduction -->
+        <div class="page">
+            <h2>Asexual Reproduction in Plants</h2>
+            <p>Asexual reproduction is the production of offspring identical to a single parent. Unlike sexual reproduction, it doesn't involve the fusion of gametes or the combination of genetic material from two parents.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1591955506264-3f5a6834570a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" altPlant propagation through cuttings">
+                <div class="caption">Plant cuttings - a common method of asexual reproduction</div>
+            </div>
+            
+            <p>According to Sylvia S. Mader and Michael Windelspecht, "Asexual reproduction is less complicated in plants because pollination and seed production is not required. Therefore, it can be advantageous when the parent is already well adapted to a particular environment, and the production of genetic variations is not an apparent necessity."</p>
+            
+            <div class="interactive-box">
+                <h3>Advantages of Asexual Reproduction:</h3>
+                <ul>
+                    <li>Rapid population growth</li>
+                    <li>No need for pollinators</li>
+                    <li>Preservation of successful genetic combinations</li>
+                    <li>Energy efficient compared to sexual reproduction</li>
+                </ul>
+            </div>
+            
+            <p>Farmers take advantage of these characteristics to propagate plants with desirable traits such as high yield, disease resistance, or specific fruit characteristics.</p>
+        </div>
+        
+        <!-- Page 3: Rhizomes & Examples -->
+        <div class="page">
+            <h2>Rhizomes and Other Asexual Structures</h2>
+            <p>Plants have evolved various structures for asexual reproduction. One of the most common is the rhizome.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1596638787647-904b822cee59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ginger rhizomes">
+                <div class="caption">Ginger rhizomes - an example of underground stems that produce new plants</div>
+            </div>
+            
+            <p><strong>Rhizomes</strong> are underground stems that grow horizontally and produce new plants at their nodes. Examples of plants that reproduce via rhizomes include ginger, turmeric, and bamboo.</p>
+            
+            <div class="interactive-box">
+                <h3>Other Asexual Reproduction Methods in Plants:</h3>
+                <ul>
+                    <li><strong>Tubers:</strong> Potatoes grow from tubers which are swollen underground stems</li>
+                    <li><strong>Bulbs:</strong> Onions and tulips grow from bulbs</li>
+                    <li><strong>Runners:</strong> Strawberries produce horizontal stems called stolons that form new plants</li>
+                    <li><strong>Cuttings:</strong> Many plants can be propagated from stem or leaf cuttings</li>
+                    <li><strong>Grafting:</strong> Combining tissues from two plants to grow as one</li>
+                </ul>
+            </div>
+            
+            <p>Farmers use these natural reproductive strategies to quickly establish crops with consistent quality and characteristics.</p>
+        </div>
+        
+        <!-- Page 4: Selective Breeding -->
+        <div class="page">
+            <h2>Selective Breeding in Agriculture</h2>
+            <p>Selective breeding, also known as artificial selection, is the process by which humans breed plants and animals for particular genetic traits.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1625246333193-4c6ed141e4d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Different types of tomatoes showing selective breeding results">
+                <div class="caption">Selective breeding has created diverse varieties of tomatoes</div>
+            </div>
+            
+            <p>As noted in the Library of Science, World of Plants: "The earliest form of genetics was selective breeding. This involves carefully breeding together individuals which carry desirable traits, so that the traits are passed on."</p>
+            
+            <p>There are two main approaches:</p>
+            <ul>
+                <li><strong>Pure-breeding:</strong> Using plants or animals of the same variety</li>
+                <li><strong>Cross-breeding:</strong> Using different varieties to combine desirable traits</li>
+            </ul>
+            
+            <div class="interactive-box">
+                <h3>Impact of Selective Breeding:</h3>
+                <p>While selective breeding has given us many of the food crops we rely on today, it's important to note that "overuse of selective breeding may lead to a loss of biodiversity - the huge variety of living things on earth."</p>
+            </div>
+            
+            <p>Farmers combine knowledge of asexual reproduction with selective breeding to efficiently propagate plants with desired characteristics without introducing genetic variation through sexual reproduction.</p>
+        </div>
+        
+        <!-- Page 5: Cultivated Plants -->
+        <div class="page">
+            <h2>Cultivated Plants and Domestication</h2>
+            <p>Cultivated plants refer to species that have been domesticated and are grown in settlements or fields for human consumption and use.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Agricultural field with rows of crops">
+                <div class="caption">Modern agriculture relies on cultivated plants developed through selective breeding</div>
+            </div>
+            
+            <p>The process of plant domestication has dramatically changed plants through generations of selective breeding. Many of our modern crops look very different from their wild ancestors.</p>
+            
+            <div class="interactive-box">
+                <h3>Examples of Selectively Bred Cultivated Plants:</h3>
+                <ul>
+                    <li><strong>Corn:</strong> Developed from teosinte, a wild grass with very small ears</li>
+                    <li><strong>Bananas:</strong> Modern seedless varieties are propagated asexually</li>
+                    <li><strong>Apples:</strong> Most varieties are grafted to maintain their characteristics</li>
+                    <li><strong>Wheat:</strong> selectively bred for higher yield and easier harvesting</li>
+                </ul>
+            </div>
+            
+            <p>By using asexual reproduction techniques, farmers can ensure that these carefully developed traits are preserved generation after generation.</p>
+        </div>
+        
+        <!-- Page 6: Interactive Quiz -->
+        <div class="page">
+            <h2>Test Your Knowledge</h2>
+            <p>Let's see how much you've learned about asexual reproduction and selective breeding in plants!</p>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">1. What is asexual reproduction?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, 0)">Production of offspring identical to a single parent</div>
+                    <div class="quiz-option" onclick="selectOption(this, 0)">Combination of genetic material from two parents</div>
+                    <div class="quiz-option" onclick="selectOption(this, 0)">Reproduction that requires flowers and pollination</div>
+                    <div class="quiz-option" onclick="selectOption(this, 0)">A rare phenomenon in the plant kingdom</div>
+                </div>
+                
+                <div class="quiz-question">2. Which of these is an example of asexual reproduction structure?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, 1)">Rhizome</div>
+                    <div class="quiz-option" onclick="selectOption(this, 1)">Flower</div>
+                    <div class="quiz-option" onclick="selectOption(this, 1)">Seed</div>
+                    <div class="quiz-option" onclick="selectOption(this, 1)">Pollen</div>
+                </div>
+                
+                <div class="quiz-question">3. What is selective breeding?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, 2)">Natural selection of the strongest plants</div>
+                    <div class="quiz-option" onclick="selectOption(this, 2)">Breeding plants with desirable traits intentionally</div>
+                    <div class="quiz-option" onclick="selectOption(this, 2)">Allowing plants to cross-pollinate randomly</div>
+                    <div class="quiz-option" onclick="selectOption(this, 2)">Growing plants in controlled environments only</div>
+                </div>
+                
+                <div class="quiz-question">4. Why is asexual reproduction advantageous for farmers?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, 3)">It allows for greater genetic diversity</div>
+                    <div class="quiz-option" onclick="selectOption(this, 3)">It preserves desirable traits exactly</div>
+                    <div class="quiz-option" onclick="selectOption(this, 3)">It requires more time and effort</div>
+                    <div class="quiz-option" onclick="selectOption(this, 3)">It makes plants more resistant to diseases</div>
+                </div>
+                
+                <button class="btn-submit" onclick="checkAnswers()">Submit Answers</button>
+                
+                <div id="quiz-feedback"></div>
+            </div>
+            
+            <div class="interactive-box">
+                <h3>Think About It:</h3>
+                <p>If you were a farmer, which method would you use to grow apples with consistent taste and size? Why might you choose asexual reproduction over sexual reproduction for this purpose?</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Educational Resource on Asexual Reproduction & Selective Breeding</p>
+            <p class="references">References: Sylvia S. Mader, Michael Windelspecht; Library of Science, World of Plants</p>
+            <p>© 2023 Plant Science Education</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation
+        const pages = document.querySelectorAll('.page');
+        
+        function showPage(index) {
+            pages.forEach(page => page.classList.remove('active'));
+            pages[index].classList.add('active');
+        }
+        
+        // Quiz functionality
+        const correctAnswers = [0, 0, 1, 1]; // Index of correct answers for each question
+        let userAnswers = [-1, -1, -1, -1]; // Initialize with no answers
+        
+        function selectOption(element, questionIndex) {
+            // Remove selected class from all options in this question
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Store the user's answer
+            const optionIndex = Array.from(options).indexOf(element);
+            userAnswers[questionIndex] = optionIndex;
+        }
+        
+        function checkAnswers() {
+            let score = 0;
+            let feedbackHTML = "";
+            
+            for (let i = 0; i < correctAnswers.length; i++) {
+                if (userAnswers[i] === correctAnswers[i]) {
+                    score++;
+                    feedbackHTML += `<div class="feedback correct">Question ${i+1}: Correct! Well done.</div>`;
+                } else if (userAnswers[i] === -1) {
+                    feedbackHTML += `<div class="feedback incorrect">Question ${i+1}: Please select an answer.</div>`;
+                } else {
+                    feedbackHTML += `<div class="feedback incorrect">Question ${i+1}: Incorrect. Try again!</div>`;
+                }
+            }
+            
+            feedbackHTML = `<h3>Score: ${score}/${correctAnswers.length}</h3>` + feedbackHTML;
+            document.getElementById('quiz-feedback').innerHTML = feedbackHTML;
+            document.getElementById('quiz-feedback').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
